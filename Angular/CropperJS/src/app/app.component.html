@@ -1,34 +1,30 @@
 <!-- Wrap the image or canvas element with a block element (container) -->
 <div class="img-container">
-  <img id="image"
-       [src]="imageUrl">
-
-  <!-- <angular-cropper #ngCropper
-                   [cropperOptions]="config"
-                   [imageUrl]="imageUrl"></angular-cropper> -->
+        <img id="image"
+             [src]="imageUrl">
 </div>
 
 <div class="img-output">
 </div>
 
 <div class="img-output-func">
-  <img [src]="imgOutput"
-       alt="">
+        <img [src]="imgOutput"
+             alt="">
 </div>
 
 <div>
-  <button class=""
-          (click)="crop()">Crop</button>
-  <button class=""
-          (click)="rotate()">Rotate</button>
+        <button class=""
+                (click)="crop()">Crop</button>
+        <button class=""
+                (click)="rotate()">Rotate</button>
 
-  <button class=""
-          (click)="flipX()">Flip X</button>
+        <button class=""
+                (click)="flipX()">Flip X</button>
 
-  <button class=""
-          (click)="flipY()">Flip Y</button>
+        <button class=""
+                (click)="flipY()">Flip Y</button>
 
-  <button (click)="changePic()">Change Picture</button>
-  <input type="file"
-         (change)="uploadFile($event)">
+        <button (click)="changePic()">Change Picture</button>
+        <input type="file"
+               (change)="uploadFile($event)">
 </div>
