@@ -1,6 +1,7 @@
 .img-container {
   width: 500px;
   height: 500px;
+  direction: ltr !important;
 }
 
 #image {
@@ -13,6 +14,7 @@ img-output-func {
   width: 200px !important;
   height: 200px !important;
   overflow: hidden;
+  direction: ltr !important;
 }
 
 .img-output-func {
