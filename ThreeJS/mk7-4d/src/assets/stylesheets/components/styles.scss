@@ -1,0 +1,31 @@
+@import "../variables";
+
+#nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  .btn {
+    padding: 10px 10px;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: bold;
+    &:hover {
+      color: $pri;
+    }
+
+    &.active {
+      color: $pri;
+      border-bottom: 0.7px solid $pri;
+    }
+  }
+}
+
+#header {
+  user-select: none;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 2rem;
+  padding: 1rem 3rem;
+}
