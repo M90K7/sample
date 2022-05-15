@@ -17,7 +17,7 @@ npx prisma init
 
 Prisma Client is an auto-generated and type-safe query builder that's tailored to your data.
 
-### Responsibilities of the [Query Engine](https://www.prisma.io/docs/concepts/components/prisma-engines/query-engine)
+### Query Engine: Responsibilities of the [Query Engine](https://www.prisma.io/docs/concepts/components/prisma-engines/query-engine)
 
 - manage physical database connections in connection pool
 
