@@ -1,0 +1,159 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  // output   = "../prisma/models"
+}
+
+datasource db {
+  provider          = "sqlserver"
+  url               = env("DATABASE_URL")
+  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
+}
+
+model Role {
+  id              Int               @id @default(autoincrement())
+  name            String
+  displayName     String?
+  User            User[]
+  ProjectTeam     ProjectTeam[]
+  PerformanceForm PerformanceForm[]
+
+  @@map("roles")
+}
+
+model User {
+  // شناسه کاربر
+  id          Int           @id @default(autoincrement())
+  // شناسه نقش
+  roleId      Int
+  // نام کاربری
+  username    String        @unique
+  password    String
+  displayName String?
+  avatar      String?
+  loginAt     DateTime?
+  isActive    Boolean       @default(true)
+  role        Role          @relation(fields: [roleId], references: [id])
+  employment  Employment?
+  projectTeam ProjectTeam[]
+
+  @@map("users")
+}
+
+model Employment {
+  id           Int       @id @default(autoincrement())
+  userId       Int       @unique
+  personalCode Int?
+  jobTitle     String?
+  nationalId   Int?
+  fullName     String?
+  fatherName   String?
+  phone        Int?
+  mobile       Int?
+  email        String?
+  birthDate    DateTime?
+  marraiage    Boolean?
+  teachTeam    String?
+  teamRole     String?
+  skill        String?
+  skillLevel   Int?
+  address      String?
+  isActive     Boolean   @default(true)
+  user         User      @relation(fields: [userId], references: [id])
+
+  @@map("employments")
+}
+
+model Project {
+  id                Int                 @id @default(autoincrement())
+  title             String              @unique
+  jiraProjectUrl    String              @unique
+  confluenceUrl     String?
+  qualityLevel      Int?
+  priorityLevel     Int?
+  importanceLevel   Int?
+  description       String?
+  startDate         DateTime?           @default(now())
+  endDate           DateTime?
+  isActive          Boolean             @default(true)
+  ProjectTeam       ProjectTeam[]
+  PerformanceResult PerformanceResult[]
+
+  @@map("projects")
+}
+
+model ProjectTeam {
+  id        Int     @id @default(autoincrement())
+  projectId Int
+  userId    Int
+  roleId    Int
+  project   Project @relation(fields: [projectId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  user      User    @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  role      Role    @relation(fields: [roleId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@map("projectTeams")
+}
+
+model PerformanceForm {
+  id                        Int                         @id @default(autoincrement())
+  title                     String
+  roleId                    Int
+  role                      Role                        @relation(fields: [roleId], references: [id])
+  performanceQuestion       PerformanceQuestion[]
+  performanceQuestionResult PerformanceQuestionResult[]
+
+  @@map("performanceForms")
+}
+
+model PerformanceQuestion {
+  id                        Int                         @id @default(autoincrement())
+  title                     String
+  performanceFormId         Int
+  scoreType                 Int
+  performanceForm           PerformanceForm             @relation(fields: [performanceFormId], references: [id])
+  performanceQuestionResult PerformanceQuestionResult[]
+
+  @@map("performanceQuestions")
+}
+
+model PerformanceQuestionResult {
+  id                    Int                 @id @default(autoincrement())
+  formId                Int
+  performanceQuestionId Int
+  score                 Int
+  createdAt             DateTime            @default(now())
+  updatedAt             DateTime            @default(now())
+  performanceForm       PerformanceForm     @relation(fields: [formId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  performanceQuestion   PerformanceQuestion @relation(fields: [performanceQuestionId], references: [id])
+
+  @@map("performanceQuestionResults")
+}
+
+model PerformanceRoleResult {
+  id                  Int               @id @default(autoincrement())
+  performanceResultId Int
+  roleId              Int
+  score               Int?
+  createdAt           DateTime          @default(now())
+  status              String            @default("pending")
+  Description         String?
+  performanceResult   PerformanceResult @relation(fields: [performanceResultId], references: [id])
+
+  @@map("performanceRoleResults")
+}
+
+model PerformanceResult {
+  id                    Int                     @id @default(autoincrement())
+  projectId             Int
+  score                 Int?
+  createdAt             DateTime                @default(now())
+  updatedAt             DateTime                @default(now())
+  status                String                  @default("pending")
+  description           String?
+  project               Project                 @relation(fields: [projectId], references: [id])
+  PerformanceRoleResult PerformanceRoleResult[]
+
+  @@map("performanceResults")
+}
