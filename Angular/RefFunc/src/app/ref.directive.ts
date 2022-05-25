@@ -1,7 +1,9 @@
 import { Directive, ElementRef, Input, OnInit, TemplateRef, ViewContainerRef } from "@angular/core";
 
 /**
- * @author: Moslem Shahsavan `(m90k7@github.com)`
+ * https://github.com/M90K7/samples/tree/main/Angular/RefFunc
+ * 
+ * @author: Moslem Shahsavan
  * @license: MIT
  * @title RefDirective
  * @description Define element reference to angular html.
@@ -16,10 +18,8 @@ import { Directive, ElementRef, Input, OnInit, TemplateRef, ViewContainerRef } f
 ---
  #### typescript
  ```ts
- changeStyle(el: ElementRef, color: string, h1: HTMLElement) {
-    console.log(el.nativeElement);
+ changeStyle(el: ElementRef, color: string) {
     el.nativeElement.style.backgroundColor = color;
-    h1.style.border = `1px solid ${color}`;
   }
  ```
  */
