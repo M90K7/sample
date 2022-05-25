@@ -14,7 +14,7 @@ import { Directive, ElementRef, Input, OnInit, TemplateRef, ViewContainerRef } f
 <p *ref="let ele as changeStyle with ['blue']">
   p.clientWidth: {{ ele.nativeElement.clientWidth }}
 </p>
- ````
+ ```
 ---
  #### typescript
  ```ts
