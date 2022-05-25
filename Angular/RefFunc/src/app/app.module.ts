@@ -2,12 +2,13 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent, FuncDirective } from './app.component';
+import { AppComponent } from './app.component';
+import { RefDirective } from "./ref.directive";
 
 @NgModule({
   declarations: [
     AppComponent,
-    FuncDirective
+    RefDirective
   ],
   imports: [
     BrowserModule,

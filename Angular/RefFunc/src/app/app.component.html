@@ -1,2 +1,26 @@
-<h1>{{ title }}</h1>
-<p *func="changeStyle">Start editing to see some magic happen :)</p>
+<h2>Sample 1: Call simple function</h2>
+<p *ref="changeStyle">Sample 1 :)</p>
+<hr />
+<h2>Sample 2: Call function with parameters</h2>
+<p *ref="changeStyleColor with ['rgb(106, 151, 202)']">Sample 2</p>
+<hr />
+<h2>Sample 3: Call function and use reference element</h2>
+<p *ref="let ele func changeStyleColor with ['rgb(106, 202, 122)']">
+  Sample 3 - p.clientWidth {{ ele.nativeElement.clientWidth }}
+</p>
+<hr />
+<h2>Sample 4: Call function and bind to this context</h2>
+<p *ref="let ele func changeStyleColor with ['rgb(202, 200, 106)'] bind this">
+  Sample 4 - p.clientWidth {{ ele.nativeElement.clientWidth }}
+</p>
+<p *ref="let ele func changeStyleColor.bind(this) with ['rgb(202, 200, 106)']">
+  Sample 4 - bind with native javascript - p.clientWidth
+  {{ ele.nativeElement.clientWidth }}
+</p>
+<hr />
+<h2 #h2Ele>
+  Sample 5: Call function mixed
+  <p *ref="let ele func changeStyleColorMixed with ['rgb(202, 106, 106)', h2Ele] bind this">
+    Sample 4 - p.clientWidth: {{ ele.nativeElement.clientWidth }}
+  </p>
+</h2>
