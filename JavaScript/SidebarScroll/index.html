@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible"
+          content="IE=edge">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+      html {
+        direction: rtl;
+        text-align: start;
+        height: 100%;
+      }
+
+      body {
+        height: 100%;
+        margin: 0;
+      }
+
+      .container {
+        --sidebar-width: 30%;
+        --sidebar-top: 100px;
+        --container-margin: 50px;
+        --container-gap: 20px;
+        position: relative;
+      }
+
+      .center {
+        position: absolute;
+        width: calc((100% - (var(--sidebar-width) * 2)) - ((var(--container-margin) + var(--container-gap)) * 2));
+        left: calc(30% + var(--container-margin) + var(--container-gap));
+        padding: var(--container-gap) 0;
+      }
+
+      .center,
+      .scroll-box {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .center,
+      .left,
+      .right {}
+
+      .left,
+      .right {
+        position: fixed;
+        width: calc(30% - (var(--container-gap) * 2));
+        /* height: calc(100vh - (var(--container-gap) * 2)); */
+        top: var(--sidebar-top);
+        bottom: 0;
+        overflow-y: auto;
+        padding: var(--container-gap) var(--container-gap);
+      }
+
+      .right::-webkit-scrollbar,
+      .left::-webkit-scrollbar {
+        width: 0px;
+        background: transparent;
+        /* make scrollbar transparent */
+      }
+
+      .right {
+        right: calc(var(--container-margin))
+      }
+
+      .left {
+        left: calc(var(--container-margin));
+      }
+
+      .box {
+        /* width: 100%; */
+        min-height: 500px;
+        height: 500px;
+        background-color: #d09595;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(149, 149, 149, 0.2);
+        overflow: hidden;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        padding: 20px;
+        border-radius: 20px;
+
+        font-size: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .left .box {
+        background-color: #95d0a2;
+      }
+
+      .right .box {
+        background-color: #9b95d0;
+      }
+
+      .scroll-box {}
+
+      .menus {
+        height: 100px;
+        background-color: aqua;
+        z-index: 2;
+        position: relative;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="menus"></div>
+    <div class="container">
+      <div class="left scroll-box">
+        <div class="box">1</div>
+        <div class="box">2</div>
+        <div class="box">3</div>
+        <div class="box">4</div>
+      </div>
+      <div class="center">
+        <div class="box">1</div>
+        <div class="box">2</div>
+        <div class="box">3</div>
+        <div class="box">4</div>
+        <div class="box">5</div>
+        <div class="box">6</div>
+        <div class="box">7</div>
+      </div>
+      <div class="right scroll-box">
+        <div class="box">1</div>
+        <div class="box">2</div>
+        <div class="box">3</div>
+        <div class="box">4</div>
+        <div class="box">5</div>
+      </div>
+    </div>
+
+    <script src="main.js"></script>
+  </body>
+
+</html>
