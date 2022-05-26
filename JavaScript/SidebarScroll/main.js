@@ -29,7 +29,7 @@ window.onscroll = ($event) => {
       behavior: 'smooth'
     });
     rightEle.scroll({
-      top: leftEle.scrollTop + sTop,
+      top: rightEle.scrollTop + sTop,
       behavior: 'smooth'
     });
   } else {
@@ -40,7 +40,7 @@ window.onscroll = ($event) => {
       behavior: 'smooth'
     });
     rightEle.scroll({
-      top: leftEle.scrollTop - sDown,
+      top: rightEle.scrollTop - sDown,
       behavior: 'smooth'
     });
   }
