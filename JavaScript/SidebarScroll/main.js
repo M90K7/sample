@@ -43,6 +43,19 @@ const checkTopBottom = (centerRectNow) => {
     return false;
   }
 
+  // end of scroll
+  if(centerRectNow.bottom < window.innerHeight){
+    centerEle.scrollHeight > leftEle.scrollHeight && leftEle.scroll({
+      top: leftEle.scrollHeight,
+      //behavior: 'smooth'
+    });
+    centerEle.scrollHeight > rightEle.scrollHeight &&  rightEle.scroll({
+      top: rightEle.scrollHeight,
+      //behavior: 'smooth'
+    });
+    return;
+  }
+
   return true
 }
 
@@ -115,7 +128,7 @@ window.onscroll = ($event) => {
 
 window.onscroll(); 
 
-footerEle.style.top  = centerEle.scrollHeight + 'px';
+footerEle.style.top  = Math.max(centerEle.scrollHeight, rightEle.scrollHeight, leftEle.scrollHeight) + 'px';
 
 // window.onscroll = ($event) => {
 //   var pagH = centerEle.clientHeight - window.outerHeight;
