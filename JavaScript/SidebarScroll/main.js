@@ -8,7 +8,8 @@ const footerEle = document.querySelector('.footer');
 scrollLast = window.pageYOffset || document.documentElement.scrollTop;
 
 let centerRect = centerEle.getBoundingClientRect();  
-const containerTop = centerRect.top + 20;
+const gapWidth = 20;
+const containerTop = centerRect.top + gapWidth;
 
 const checkTopBottom = (centerRectNow) => {
 
@@ -30,7 +31,7 @@ const checkTopBottom = (centerRectNow) => {
   rightEle.style.bottom = bottom + 'px';
 
   // start of scroll
-  if(centerRectNow.top + 20 > 0){
+  if(centerRectNow.top + gapWidth > 0){
     leftEle.scroll({
       top: 0,
       //behavior: 'smooth'
