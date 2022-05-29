@@ -1,20 +1,22 @@
 
-  const leftEle = document.querySelector('.left');
-  const rightEle = document.querySelector('.right');
-  const centerEle = document.querySelector('.center');
-  const footerEle = document.querySelector('.footer');
-  
-  scrollLast = window.pageYOffset || document.documentElement.scrollTop;
+const containerEle = document.querySelector('.container');
+const leftEle = document.querySelector('.left');
+const rightEle = document.querySelector('.right');
+const centerEle = document.querySelector('.center');
+const footerEle = document.querySelector('.footer');
 
-window.onscroll = ($event) => {
+scrollLast = window.pageYOffset || document.documentElement.scrollTop;
 
-  const centerRectNow = centerEle.getBoundingClientRect();
+let centerRect = centerEle.getBoundingClientRect();  
+const containerTop = centerRect.top + 20;
 
-  let top = 120;
+const checkTopBottom = (centerRectNow) => {
+
   let bottom = 0;
+  let top = containerTop;
   if (centerRectNow.top > 0) {
     top = centerRectNow.top;
-  }else {
+  } else {
     top = 0;
   }
 
@@ -28,7 +30,7 @@ window.onscroll = ($event) => {
   rightEle.style.bottom = bottom + 'px';
 
   // start of scroll
-  if(top > 0){
+  if(centerRectNow.top + 20 > 0){
     leftEle.scroll({
       top: 0,
       //behavior: 'smooth'
@@ -37,53 +39,80 @@ window.onscroll = ($event) => {
       top: 0,
       //behavior: 'smooth'
     });
-    return;
+    return false;
   }
 
-  // end of scroll
-  if(centerRectNow.bottom < window.innerHeight){
-    leftEle.scroll({
-      top: leftEle.scrollHeight,
-      //behavior: 'smooth'
-    });
-    rightEle.scroll({
-      top: rightEle.scrollHeight,
-      //behavior: 'smooth'
-    });
+  return true
+}
+
+checkTopBottom(centerRect);
+
+
+
+window.onscroll = ($event) => {
+  
+  const centerRectNow = centerEle.getBoundingClientRect();
+  if(!checkTopBottom(centerRectNow)){
     return;
   }
+  
+  // start of scroll
+  // if(top > 0){
+  //   leftEle.scroll({
+  //     top: 0,
+  //     //behavior: 'smooth'
+  //   });
+  //   rightEle.scroll({
+  //     top: 0,
+  //     //behavior: 'smooth'
+  //   });
+  //   return;
+  // }
+
+  // end of scroll
+  // if(centerRectNow.bottom < window.innerHeight){
+  //   leftEle.scroll({
+  //     top: leftEle.scrollHeight,
+  //     //behavior: 'smooth'
+  //   });
+  //   rightEle.scroll({
+  //     top: rightEle.scrollHeight,
+  //     //behavior: 'smooth'
+  //   });
+  //   return;
+  // }
 
   const scrollNow = window.pageYOffset || document.documentElement.scrollTop;
 
-  const left_per = (leftEle.scrollHeight + window.innerHeight) / centerRectNow.height;
-  const right_per = (rightEle.scrollHeight + window.innerHeight) / centerRectNow.height;
+  const left_per = (leftEle.scrollHeight + window.innerHeight) / (centerRectNow.height + window.innerHeight);
+  const right_per = (rightEle.scrollHeight + window.innerHeight) / (centerRectNow.height + window.innerHeight);
 
   if (scrollLast < scrollNow) {
     // scroll down
-    const sTop = 200;
-    leftEle.scroll({
+    (leftEle.scrollTop + leftEle.clientHeight + 1 <= leftEle.scrollHeight) && leftEle.scroll({
       top: window.scrollY * left_per, //leftEle.scrollTop + sTop,
-      behavior: 'smooth'
+      //behavior: 'smooth'
     });
-    rightEle.scroll({
+    (rightEle.scrollTop + rightEle.clientHeight + 1 <= rightEle.scrollHeight) && rightEle.scroll({
       top: window.scrollY * right_per, // rightEle.scrollTop + sTop,
-      behavior: 'smooth'
+      //behavior: 'smooth'
     });
   } else {
     // scroll up
-    const sDown = 200;
-    leftEle.scroll({
+    leftEle.scrollTop && leftEle.scroll({
       top: window.scrollY * left_per, //leftEle.scrollTop - sDown,
-      behavior: 'smooth'
+      //behavior: 'smooth'
     });
-    rightEle.scroll({
+    rightEle.scrollTop && rightEle.scroll({
       top: window.scrollY * right_per, // rightEle.scrollTop - sDown,
-      behavior: 'smooth'
+      //behavior: 'smooth'
     });
   }
 
   scrollLast = scrollNow;
 }
+
+window.onscroll(); 
 
 footerEle.style.top  = centerEle.scrollHeight + 'px';
 
