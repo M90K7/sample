@@ -91,7 +91,8 @@ app-sidebar-menus {
     .menu-title {
       opacity: 0;
     }
-    .menu-sub {
+    .menu-sub,
+    .menu-sub-indention .menu-sub.show {
       height: 0;
       overflow: hidden;
     }
