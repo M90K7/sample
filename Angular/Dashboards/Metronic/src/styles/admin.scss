@@ -1,0 +1,40 @@
+@import "./components.scss";
+
+.app-container {
+  @mixin box-style($radius: 30px) {
+    box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.1);
+    border-radius: $radius;
+  }
+  $container-gap: 20px;
+  $container-radius: 20px;
+
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: $container-gap;
+
+  .header {
+    display: block;
+    height: 70px;
+    @include box-style(0px);
+  }
+
+  .app-content {
+    display: flex;
+    gap: $container-gap;
+    height: calc(100% - 77px);
+
+    .app-pages {
+      @include box-style(0 $container-radius $container-radius 0);
+      height: 100%;
+      width: 100%;
+
+      &.compact {
+        margin-right: 95px;
+      }
+    }
+  }
+  app-sidebar-menus {
+    @include box-style($container-radius 0 0 $container-radius);
+  }
+}

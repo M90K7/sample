@@ -1,0 +1,12 @@
+<div class="app-container">
+  <div class="header">
+    <app-admin-header (compactModeChange)="isCompact = $event"></app-admin-header>
+  </div>
+  <div class="app-content">
+    <app-sidebar-menus [class.compact]="isCompact"></app-sidebar-menus>
+    <main class="app-pages"
+          [class.compact]="isCompact">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+</div>
