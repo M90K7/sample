@@ -7,6 +7,7 @@
   }
   $container-gap: 20px;
   $container-radius: 20px;
+  $header_height: 70px;
 
   height: 100%;
   display: flex;
@@ -15,14 +16,14 @@
 
   .header {
     display: block;
-    height: 70px;
+    height: $header_height;
     @include box-style(0px);
   }
 
   .app-content {
     display: flex;
     gap: $container-gap;
-    height: calc(100% - 77px);
+    height: calc(99.5% - #{$header_height} - #{$container-gap});
 
     .app-pages {
       @include box-style(0 $container-radius $container-radius 0);
@@ -34,7 +35,11 @@
       }
     }
   }
+
   app-sidebar-menus {
     @include box-style($container-radius 0 0 $container-radius);
+    &.compact {
+      height: calc(99.5% - #{$header_height} - #{$container-gap});
+    }
   }
 }
