@@ -1,0 +1,91 @@
+// Nesting
+nav {
+  ol,
+  ul {
+    margin: 1px;
+
+    li {
+      display: inline-block;
+
+      // Combinators
+      & > span {
+        display: block;
+      }
+
+      & > {
+        a {
+          display: block;
+        }
+
+        div.link {
+          display: block;
+        }
+      }
+
+      &.red {
+        color: red;
+
+        // parent selector
+        :not(&) {
+          color: blue;
+        }
+      }
+
+      // parent selector
+      .rtl & {
+        text-align: right;
+      }
+    }
+  }
+}
+
+// CSS properties have shorthand versions
+.info-page {
+  margin: auto {
+    bottom: 10px;
+    top: 2px;
+  }
+}
+
+// Adding Suffixes
+// This is particularly useful when using a methodology like BEM
+.align {
+  &-items {
+    &-center {
+      align-items: center;
+    }
+    &-start {
+      align-items: flex-start;
+    }
+  }
+  &-content {
+    &-center {
+      align-content: center;
+    }
+    &-start {
+      align-content: flex-start;
+    }
+  }
+}
+
+// Placeholder Selectors
+%toolbelt {
+  box-sizing: border-box;
+  border-top: 1px rgba(#000, 0.12) solid;
+  padding: 16px 0;
+  width: 100%;
+
+  &:hover {
+    border: 2px rgba(#000, 0.5) solid;
+  }
+}
+
+.action-buttons {
+  @extend %toolbelt;
+  color: #4285f4;
+}
+
+.reset-buttons {
+  @extend %toolbelt;
+  color: #cddc39;
+}

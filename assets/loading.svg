@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin:auto;background:#fff;display:block; border-radius: 50%; overflow: hidden;" width="100px" height="100px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
+<defs>
+  <mask id="ldio-41xebgmjh3k-mask">
+    <rect x="0" y="0" width="100" height="100" fill="white"/>
+  </mask>
+</defs>
+<rect x="0" y="0" width="100px" height="100px" fill="#059f80"/>
+<g mask="url(#ldio-41xebgmjh3k-mask)">
+  <rect x="-100" y="-250" width="300" height="300" rx="90" ry="90" fill="#a9f6ff" opacity="0.4" style="transform: rotate(62.4619deg, 50, -110);">
+    <animateTransform attributeName="transform" type="rotate" dur="1s" repeatCount="indefinite" values="0 50 -100;90 50 -100" keyTimes="0;1"/>
+  </rect>
+
+  <rect x="-100" y="-260" width="300" height="300" rx="95" ry="95" fill="#4df3a0" opacity="0.4" style="transform: rotate(21.0023deg, 50, -100);">
+    <animateTransform attributeName="transform" type="rotate" dur="1.5151515151515151s" repeatCount="indefinite" values="0 50 -110;90 50 -110" keyTimes="0;1"/>
+  </rect>
+
+  <rect x="-100" y="-270" width="300" height="300" rx="100" ry="100" fill="#0be7ff" opacity="0.4" style="transform: rotate(31.2308deg, 50, -120);">
+    <animateTransform attributeName="transform" type="rotate" dur="3.0303030303030303s" repeatCount="indefinite" values="0 50 -120;90 50 -120" keyTimes="0;1"/>
+  </rect>
+
+</g>
+</svg>
