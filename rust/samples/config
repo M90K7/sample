@@ -1,0 +1,7 @@
+[http]
+#proxy = "http://proxy.exir.it:4030" # HTTP proxy to use for HTTP requests (defaults to none)
+timeout = 600        # Timeout for each HTTP request, in seconds
+#cainfo = "cert.pem" # Path to Certificate Authority (CA) bundle (optional)
+check-revoke = false # Indicates whether SSL certs are checked for revocation
+low-speed-limit = 0 # Lower threshold for bytes/sec (10 = default, 0 = disabled)
+multiplexing = false # whether or not to use HTTP/2 multiplexing where possible

@@ -5,7 +5,9 @@
 // mod r03_strings;
 // mod r04_compound_types;
 // mod r05_vector;
-mod r06_functions;
+// mod r06_functions;
+// mod r07_statements;
+mod r08_structures;
 
 fn main() {
     println!("Hello main!");
@@ -15,6 +17,7 @@ fn main() {
     // r03_strings::strings();
     // r04_compound_types::compounds_types();
     // r05_vector::vector();
-
-    r06_functions::test();
+    // r06_functions::test();
+    // r07_statements::test();
+    r08_structures::test();
 }

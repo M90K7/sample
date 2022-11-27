@@ -22,6 +22,10 @@ fn primitive_and_not_primitive() {
     let mut num_1 = 100;
     let num_2 = &mut num_1;
 
+    /*
+     *   * -> *num_2 is de ref operator when we use a variable as a mutable variable.
+     *   So to Update the actual value of the variable, which it is pointing to, we will use these star operator.
+     */
     *num_2 = 101;
 
     println!("a, b = {}, {}", 1, num_2);
@@ -64,8 +68,32 @@ fn primitive_and_not_primitive() {
 
     ref_immutable.push(7);
     println!("ref_immutable = {:?}", ref_immutable);
+
+    let s1 = "moslem";
+    let s2 = "shahsavan";
+    let mut s3 = s1.to_string() + s2;
+
+    let mut str_1 = String::from("moslem");
+    let str_2 = "ss"; // String::from("moslem");
+                      // let str_2 = &str_1;
+
+    str_1 += str_2;
+
+    let s4 = "m ".to_string() + "s";
+
+    let s = String::from("🎃");
+    println!("len: {}, capacity: {}", s.len(), s.capacity());
+
+    let one = "string";
+    let two = "something else";
+    let three = format!("{}{}", one, two);
+
+    // Concatenates literals into a static string slice.
+    // yielding an expression of type &'static str
+    let three = concat!("moslem", " ", "shahsavan", 10);
+    println!("concat data: {}", three);
 }
 
 fn add_family(name: &mut String) {
-    name.push_str(&"shahsavan");
+    name.push_str("shahsavan");
 }
