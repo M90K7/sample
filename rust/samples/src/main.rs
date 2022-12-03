@@ -7,7 +7,14 @@
 // mod r05_vector;
 // mod r06_functions;
 // mod r07_statements;
-mod r08_structures;
+// mod r08_structures;
+// mod r09_generics;
+mod r10_hash_map;
+
+mod common;
+
+// use common::utils;
+use common::utils::{self};
 
 fn main() {
     println!("Hello main!");
@@ -19,5 +26,9 @@ fn main() {
     // r05_vector::vector();
     // r06_functions::test();
     // r07_statements::test();
-    r08_structures::test();
+    // r08_structures::test();
+    // r09_generics::test();
+    r10_hash_map::test();
+
+    utils::test()
 }

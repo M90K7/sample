@@ -30,4 +30,10 @@ pub fn vector() {
         names.set_len(0);
         println!("My name is {:?}", names);
     }
+
+    hash_maps();
+}
+
+fn hash_maps() {
+    let wordDic = HashMap::new();
 }
