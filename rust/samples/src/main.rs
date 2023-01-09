@@ -9,12 +9,13 @@
 // mod r07_statements;
 // mod r08_structures;
 // mod r09_generics;
-mod r10_hash_map;
+// mod r10_hash_map;
+mod r11_lifetime;
 
 mod common;
 
 // use common::utils;
-use common::utils::{self};
+//use common::utils::{self};
 
 fn main() {
     println!("Hello main!");
@@ -28,7 +29,9 @@ fn main() {
     // r07_statements::test();
     // r08_structures::test();
     // r09_generics::test();
-    r10_hash_map::test();
+    // r10_hash_map::test();
 
-    utils::test()
+    r11_lifetime::test();
+
+    // utils::test()
 }

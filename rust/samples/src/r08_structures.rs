@@ -20,7 +20,7 @@ pub fn test() {
     // println!("Person trait impl {}", p1.print_name());
     // p1.print();
 
-    let p2 = Person {
+    let mut p2 = Person {
         email: String::from("test.com"),
         //..Person::new() //,
         ..p1 // <- barrow HEAP fields unless define fields like email
@@ -66,6 +66,19 @@ pub fn test() {
     if let LogKind::Debug = logType {
         println!("logType: {:?}", logType as i32);
     }
+
+    print_person_name(&p2);
+
+    let mut emp = Employee {
+        person: Person {
+            name: String::from("John"),
+            ..Person::new()
+        },
+        id: 10,
+        address: String::from(""),
+    };
+    print_person_name(&emp);
+    print_name_info(&emp);
 }
 
 #[derive(Debug)]
@@ -93,6 +106,12 @@ impl Person {
     }
 }
 
+struct Employee {
+    person: Person,
+    id: usize,
+    address: String,
+}
+
 // Tuple Structure
 
 struct Point3D(i32, i32, i32);
@@ -117,6 +136,20 @@ impl NameInfo for Person {
     fn print_name(&self) -> &str {
         &self.name
     }
+}
+
+impl NameInfo for Employee {
+    fn print_name<'e>(&'e self) -> &'e str {
+        &self.person.name
+    }
+}
+
+fn print_person_name(name_info: &impl NameInfo) {
+    println!("> printPersonName is {}", name_info.print_name());
+}
+
+fn print_name_info<T: NameInfo>(ni: &T) {
+    ni.print_name();
 }
 
 struct AlwaysEqual;
@@ -148,4 +181,10 @@ enum LogKind {
     Info = 5,
     Warning,
     Debug,
+}
+
+impl ToString for dyn NameInfo {
+    fn to_string(&self) -> String {
+        format!("{}", self.print_name())
+    }
 }
