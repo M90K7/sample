@@ -1,9 +1,10 @@
 use super::address::Address;
 
+#[derive(Clone, Debug)]
 pub struct Student {
-    id: u32,
-    name: String,
-    family: String,
-    age: i32,
-    address: Address,
+    pub id: u32,
+    pub name: String,
+    pub family: String,
+    pub age: u32,
+    // address: Address,
 }
