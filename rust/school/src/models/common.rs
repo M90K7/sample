@@ -5,7 +5,7 @@ pub trait Entity<T> {
     fn add<'t>(&mut self, entity: &'t T) -> Option<&'t T>;
     fn update<'t>(entity: &'t T) -> Option<bool>;
     fn remove(id: i32) -> Option<bool>;
-    fn list() -> Option<&'static [T]>;
+    fn list(&self) -> Option<&Vec<T>>;
     fn find<'t>(id: i32) -> Result<&'t T, bool>;
     fn filter(predicate: Predicate<T>) -> Option<&'static [T]>;
 }

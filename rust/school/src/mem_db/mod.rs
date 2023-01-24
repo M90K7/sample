@@ -19,11 +19,15 @@ impl Storage<'_> {
 
     pub fn load(&mut self) {
         let input = read_to_string("./db.txt").unwrap_or(String::new());
+
         if input.is_empty() {
             return;
         }
         let mut lines = input.split("\n");
         for line in lines {
+            if line.is_empty() {
+                continue;
+            }
             let mut s_str = line.split(";");
 
             let id = u32::from_str_radix(s_str.next().unwrap_or("0"), 10);
@@ -41,7 +45,7 @@ impl Storage<'_> {
         }
     }
 
-    pub fn save<'t>(&mut self) -> Result<(), Error> {
+    pub fn save<'t>(&self) -> Result<(), Error> {
         let mut text = String::new();
         for student in self.student.data.iter() {
             text.push_str(
@@ -84,8 +88,8 @@ impl Entity<Student> for DbEntity<'_, Student> {
         todo!()
     }
 
-    fn list() -> Option<&'static [Student]> {
-        todo!()
+    fn list(&self) -> Option<&Vec<Student>> {
+        Option::Some(self.data)
     }
 
     fn find<'t>(id: i32) -> Result<&'t Student, bool> {
