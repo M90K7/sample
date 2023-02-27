@@ -1,6 +1,7 @@
 use std::{
     fmt::Error,
     fs::{read_to_string, write},
+    ops::Index,
 };
 
 use crate::models::common::{Entity, Predicate};
@@ -84,8 +85,14 @@ impl Entity<Student> for DbEntity<'_, Student> {
         todo!()
     }
 
-    fn remove(id: i32) -> Option<bool> {
-        todo!()
+    fn remove(&mut self, id: u32) -> Option<Student> {
+        let rem_student = self.data.drain_filter(|s| s.id == id).collect::<Vec<_>>();
+
+        if rem_student.len() == 0 {
+            None
+        } else {
+            Some(rem_student.first().unwrap().to_owned())
+        }
     }
 
     fn list(&self) -> Option<&Vec<Student>> {

@@ -4,8 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "watch": "npx sass -w src:dist"
+    "watch": "npx sass -w src:dist",
+	"start:sass": "npx node-sass --watch --recursive --output dist --source-map true --source-map-contents src",
+	"build": "npx node-sass --recursive --output dist --source-map true --source-map-contents src",
+	"file-sample": "npx node-sass --output-style compressed cdn.scss > export.css"
   },
   "keywords": [],
   "author": "",

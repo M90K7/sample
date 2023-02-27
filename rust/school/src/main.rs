@@ -1,3 +1,5 @@
+#![feature(drain_filter)]
+
 mod command;
 mod console;
 mod mem_db;
@@ -25,6 +27,18 @@ fn main() {
                 console::print_students(db.student.list().unwrap());
                 console::print_read_menu();
             }
+            Command::Delete(id_opt) => {
+                if let Some(id) = id_opt {
+                    let student = db.student.remove(id);
+                    match student {
+                        Some(s) => console::print_remove_student(&s),
+                        None => console::print_not_fount_student(),
+                    }
+                    console::print_read_menu();
+                } else {
+                    console::print_read_menu();
+                }
+            }
             _ => {
                 console::print_invalid_menu();
             }
@@ -43,5 +57,4 @@ fn main() {
     // println!("{:?}", s);
     // storage.newStudent().
     // let s = Student {};
-    println!("Hello, world!");
 }

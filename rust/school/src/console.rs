@@ -7,6 +7,7 @@ pub fn print_menus() {
         "Welcome To School Manager
 
 *** Menus  
+  L > Show students
   I > Insert student
   U > Update student
   D > Delete student
@@ -30,6 +31,19 @@ pub fn print_students(students: &[Student]) {
     }
 }
 
+pub fn print_remove_student(student: &Student) {
+    write("student removed = ");
+    print_student(student);
+}
+
+pub fn print_not_fount_student() {
+    write("student not found!");
+}
+
+pub fn print_choose_id() {
+    write("Please enter a student ID: ");
+}
+
 pub fn print_invalid_menu() {
     clear();
     print_menus();
@@ -42,6 +56,6 @@ fn clear() {
 
 fn write(text: &str) {
     let mut stdout = stdout();
-    stdout.write(text.as_bytes());
+    _ = stdout.write(text.as_bytes());
     stdout.flush().unwrap();
 }
