@@ -30,3 +30,9 @@ user.save
 exit
 
 ```
+
+> Register Runner
+
+```bash
+docker-compose exec gitlab-runner gitlab-runner register
+```
