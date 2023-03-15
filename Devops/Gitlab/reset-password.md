@@ -2,19 +2,23 @@
 
 username: root
 
-### If you are using Docker, you can get this bash:
+<https://docs.gitlab.com/ee/security/reset_user_password.html>
+
+`GITLAB_ROOT_PASSWORD` string Sets the password for the root user on installation.
+
+> If you are using Docker, you can get this bash
 
 ```bash
 docker exec -it gitlab_continer bash
 ```
 
-### and open Rails console.
+> and open Rails console
 
 ```bash
 gitlab-rails console -e production
 ```
 
-### and Enter the code below
+> and Enter the code below
 
 ```bash
 gitlab-rails console -e production
