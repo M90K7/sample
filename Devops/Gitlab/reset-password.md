@@ -18,19 +18,21 @@ docker exec -it gitlab_continer bash
 gitlab-rails console -e production
 ```
 
-> and Enter the code below
+> and Enter the code below then wait to running ...
 
 ```bash
 gitlab-rails console -e production
+```
 
+> Commands
+
+```bash
 user = User.where(id: 1).first
 user.password = 'Aa123456'
 user.password_confirmation = 'Aa123456'
 user.save
 exit
-
 ```
-
 > Register Runner
 
 ```bash
