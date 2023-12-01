@@ -1,0 +1,14 @@
+F:\Github-mk7\samples\chat-gpt\c#\chat-ai\bin\Debug\net7.0\publish\chat-ai.exe
+F:\Github-mk7\samples\chat-gpt\c#\chat-ai\bin\Debug\net7.0\publish\appsettings.Development.json
+F:\Github-mk7\samples\chat-gpt\c#\chat-ai\bin\Debug\net7.0\publish\appsettings.json
+F:\Github-mk7\samples\chat-gpt\c#\chat-ai\bin\Debug\net7.0\publish\chat-ai.dll
+F:\Github-mk7\samples\chat-gpt\c#\chat-ai\bin\Debug\net7.0\publish\chat-ai.deps.json
+F:\Github-mk7\samples\chat-gpt\c#\chat-ai\bin\Debug\net7.0\publish\chat-ai.runtimeconfig.json
+F:\Github-mk7\samples\chat-gpt\c#\chat-ai\bin\Debug\net7.0\publish\chat-ai.pdb
+F:\Github-mk7\samples\chat-gpt\c#\chat-ai\bin\Debug\net7.0\publish\ChatGPT.Net.dll
+F:\Github-mk7\samples\chat-gpt\c#\chat-ai\bin\Debug\net7.0\publish\Microsoft.AspNetCore.OpenApi.dll
+F:\Github-mk7\samples\chat-gpt\c#\chat-ai\bin\Debug\net7.0\publish\Microsoft.OpenApi.dll
+F:\Github-mk7\samples\chat-gpt\c#\chat-ai\bin\Debug\net7.0\publish\Newtonsoft.Json.dll
+F:\Github-mk7\samples\chat-gpt\c#\chat-ai\bin\Debug\net7.0\publish\Swashbuckle.AspNetCore.Swagger.dll
+F:\Github-mk7\samples\chat-gpt\c#\chat-ai\bin\Debug\net7.0\publish\Swashbuckle.AspNetCore.SwaggerGen.dll
+F:\Github-mk7\samples\chat-gpt\c#\chat-ai\bin\Debug\net7.0\publish\Swashbuckle.AspNetCore.SwaggerUI.dll

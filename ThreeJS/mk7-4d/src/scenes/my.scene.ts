@@ -1,4 +1,4 @@
-import { Scene, PerspectiveCamera, BoxGeometry, MeshPhongMaterial, Mesh } from "three";
+import { Scene, PerspectiveCamera, BoxGeometry, MeshPhongMaterial, Mesh, WebGLRenderer } from "three";
 import { Scene3D } from "../models";
 
 

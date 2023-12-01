@@ -1,0 +1,16 @@
+version: '3.6'
+services:
+  registery:
+    image: 'registry:2'
+    container_name: 'docker_registry'
+    restart: 'no'
+    hostname: '172.16.58.11'
+    environment:
+      - REGISTRY_HTTP_ADDR:172.16.58.11:443 
+      - REGISTRY_HTTP_TLS_CERTIFICATE:/certs/code.crt
+      - REGISTRY_HTTP_TLS_KEY:/certs/code.key
+    ports:
+      - 9000:443
+    volumes:
+      - ./registery:/var/lib/registry
+      - ./certs:/certs

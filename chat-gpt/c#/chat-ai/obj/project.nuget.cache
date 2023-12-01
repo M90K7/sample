@@ -1,0 +1,18 @@
+{
+  "version": 2,
+  "dgSpecHash": "5PYfWaXPLqCtWHhVISk4Q3MxsRPAWAY8+tO7h0IH6iAvggZBkY2Cjq8hFEbPMELDpkXDdRtoghz5VAAiBd/4UA==",
+  "success": true,
+  "projectFilePath": "F:\\Github-mk7\\samples\\chat-gpt\\c#\\chat-ai\\chat-ai.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\M.Shahsavan\\.nuget\\packages\\chatgpt.net\\2.0.0\\chatgpt.net.2.0.0.nupkg.sha512",
+    "C:\\Users\\M.Shahsavan\\.nuget\\packages\\microsoft.aspnetcore.openapi\\7.0.2\\microsoft.aspnetcore.openapi.7.0.2.nupkg.sha512",
+    "C:\\Users\\M.Shahsavan\\.nuget\\packages\\microsoft.extensions.apidescription.server\\6.0.5\\microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",
+    "C:\\Users\\M.Shahsavan\\.nuget\\packages\\microsoft.openapi\\1.4.3\\microsoft.openapi.1.4.3.nupkg.sha512",
+    "C:\\Users\\M.Shahsavan\\.nuget\\packages\\newtonsoft.json\\13.0.2\\newtonsoft.json.13.0.2.nupkg.sha512",
+    "C:\\Users\\M.Shahsavan\\.nuget\\packages\\swashbuckle.aspnetcore\\6.4.0\\swashbuckle.aspnetcore.6.4.0.nupkg.sha512",
+    "C:\\Users\\M.Shahsavan\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.4.0\\swashbuckle.aspnetcore.swagger.6.4.0.nupkg.sha512",
+    "C:\\Users\\M.Shahsavan\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.4.0\\swashbuckle.aspnetcore.swaggergen.6.4.0.nupkg.sha512",
+    "C:\\Users\\M.Shahsavan\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.4.0\\swashbuckle.aspnetcore.swaggerui.6.4.0.nupkg.sha512"
+  ],
+  "logs": []
+}

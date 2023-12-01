@@ -1,22 +1,24 @@
 version: '3.6'
 services:
   gitlab-ce:
-    container_name: 'gitlab_ce'
     image: 'gitlab/gitlab-ce:latest'
+    container_name: 'gitlab_ce'
+    restart: 'no'
     hostname: 'localhost'
     environment:
       GITLAB_OMNIBUS_CONFIG: |
-        external_url 'http://localhost:8929'
+        external_url 'http://172.16.58.11:8929/'
         gitlab_rails['gitlab_shell_ssh_port'] = 2224
     ports:
       - 8929:8929
+      - 8080:80
       - 2224:22
       - 443:443
     volumes:
       - ./config:/etc/gitlab
       - ./logs:/var/log/gitlab
       - ./data:/var/opt/gitlab
-    shm_size: '256m'
+    shm_size: '1024m'
   # gitlab-runner:
   #   container_name: 'gitlab_runner'
   #   image: 'gitlab/gitlab-runner:latest'

@@ -22,8 +22,13 @@ const sceneItems: SceneModel[] = [
     {
         name: "Tank",
         type: scene.TankScene,
-        active: true,
+        active: false,
     },
+    {
+        name: "Buffer Array",
+        type: scene.BufferArrayScene,
+        active: true
+    }
 ];
 
 function AppDom() {

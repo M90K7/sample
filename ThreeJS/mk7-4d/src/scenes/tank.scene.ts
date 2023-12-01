@@ -1,4 +1,4 @@
-import { Scene, PerspectiveCamera, Vector2, BufferGeometry, LineBasicMaterial, BoxGeometry, CylinderGeometry, DirectionalLight, Line, Mesh, MeshPhongMaterial, Object3D, PlaneGeometry, SphereGeometry, SplineCurve, Vector3, MeshStandardMaterial, MeshPhysicalMaterial, MeshNormalMaterial } from "three";
+import { Scene, PerspectiveCamera, Vector2, BufferGeometry, LineBasicMaterial, BoxGeometry, CylinderGeometry, DirectionalLight, Line, Mesh, MeshPhongMaterial, Object3D, PlaneGeometry, SphereGeometry, SplineCurve, Vector3, MeshStandardMaterial, MeshPhysicalMaterial, MeshNormalMaterial, WebGLRenderer } from "three";
 import { Scene3D } from "../models";
 
 

@@ -1,9 +1,9 @@
 version: '3.6'
 services:
-  web:
+  gitlab-ee:
     image: 'gitlab/gitlab-ee:latest'
     container_name: 'gitlab_ee'
-    restart: always
+    restart: 'no'
     hostname: 'localhost'
     environment:
       GITLAB_OMNIBUS_CONFIG: |

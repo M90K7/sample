@@ -3,8 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const { outputConfig, copyPluginPatterns, entryConfig, devServer } = require("./env.config");
 
-module.exports = (env, options) => 
-{
+module.exports = (env, options) => {
     return {
         mode: options.mode,
         entry: entryConfig,

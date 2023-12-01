@@ -19,11 +19,6 @@ gitlab-rails console -e production
 ```
 
 > and Enter the code below then wait to running ...
-
-```bash
-gitlab-rails console -e production
-```
-
 > Commands
 
 ```bash
