@@ -51,18 +51,14 @@ export class BufferArrayScene extends Scene3D {
 
 
     const vertices = new Float32Array([
+      // ↪ Front
+      0, 0, 0,
       20, 0, 0,
+      0, 20, 0,
+      // ↩ Back
       0, 0, 0,
       0, 20, 0,
-
-      20, 0, -20,
-      0, 0, -20,
-      0, 20, -20,
-
-      -20, 0, 0,
-      0, 0, 0,
-      0, 20, 0,
-
+      20, 0, 0,
     ]);
     const buffArray = new BufferAttribute(vertices, 3);
 
@@ -115,6 +111,7 @@ export class BufferArrayScene extends Scene3D {
     this.camera.clear();
     this.scene = <any>undefined;
     this.camera = <any>undefined;
+    super.destroy();
   }
 
   PI_2 = Math.PI * 2;

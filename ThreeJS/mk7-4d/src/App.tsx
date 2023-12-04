@@ -27,6 +27,11 @@ const sceneItems: SceneModel[] = [
     {
         name: "Buffer Array",
         type: scene.BufferArrayScene,
+        active: false
+    },
+    {
+        name: "Texture",
+        type: scene.TextureScene,
         active: true
     }
 ];

@@ -1,4 +1,3 @@
-import { GUI } from 'lil-gui';
 import {
   AxesHelper,
   Camera,
@@ -10,9 +9,13 @@ import {
   WebGLRenderer
 } from "three";
 
+import { Pane } from 'tweakpane';
+
 export abstract class Scene3D {
 
-  gui = new GUI();
+  gui = new Pane();
+  basicUi = this.gui.addFolder({ title: "Basic", expanded: true });
+  controlsUi = this.gui.addFolder({ title: "Controls", expanded: true });
   renderer!: WebGLRenderer;
 
   init(renderer: WebGLRenderer) {
@@ -24,17 +27,29 @@ export abstract class Scene3D {
   abstract graph(): [Scene, Camera];
 
   destroy(): void {
+    this.gui.dispose();
   }
 
   makeAxisGrid(node: Object3D, label: string, units?: number) {
     const helper = new AxisGridHelper(node, units);
-    this.gui.add(helper, 'visible').name(label);
+    this.gui.addBinding(helper, 'visible').label = label;
   }
 
   addAxisUI(units: number = 2, label: string = "Axis") {
     const helper = new AxesHelper(units);
-    this.gui.add(helper, 'visible').name(label);
+    this.basicUi.addBinding(helper, 'visible').label = label;
     return helper;
+  }
+
+  addNumberUI(obj: any, key: string, label: string) {
+    const s = this.gui.addBinding(obj, key, {
+      label: label,
+      min: 0,
+      max: 100,
+      step: 0.1
+    });
+    this.controlsUi.add(s);
+    return s;
   }
 }
 

@@ -106,5 +106,7 @@ export class SunScene extends Scene3D {
     this.camera.clear();
 
     this.objects = <any>undefined;
+
+    super.destroy();
   }
 }
