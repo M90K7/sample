@@ -3,3 +3,7 @@ export * from "./cube.scene";
 export * from "./sun.scene";
 export * from "./tank.scene";
 export * from "./texture.scene";
+export * from "./light";
+export * from "./gltf-loader";
+export * from "./text.scene";
+export * from "./particles.scene";

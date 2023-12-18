@@ -9,11 +9,13 @@ import {
   WebGLRenderer
 } from "three";
 
-import { Pane } from 'tweakpane';
+import { BindingParams, Pane } from 'tweakpane';
 
 export abstract class Scene3D {
 
-  gui = new Pane();
+  gui = new Pane({
+
+  });
   basicUi = this.gui.addFolder({ title: "Basic", expanded: true });
   controlsUi = this.gui.addFolder({ title: "Controls", expanded: true });
   renderer!: WebGLRenderer;
@@ -41,13 +43,21 @@ export abstract class Scene3D {
     return helper;
   }
 
-  addNumberUI(obj: any, key: string, label: string) {
-    const s = this.gui.addBinding(obj, key, {
+  addNumberUI(obj: any, key: string, label: string, params: BindingParams = {}) {
+    const s = this.gui.addBinding(obj, key, Object.assign({
       label: label,
       min: 0,
       max: 100,
       step: 0.1
-    });
+    }, params || {}));
+    this.controlsUi.add(s);
+    return s;
+  }
+
+  addBooleanUI(obj: any, key: string, label: string, params: BindingParams = {}) {
+    const s = this.gui.addBinding(obj, key, Object.assign({
+      label: label,
+    }, params || {}));
     this.controlsUi.add(s);
     return s;
   }

@@ -5,12 +5,8 @@ import {
   Scene,
   TextureLoader,
   Mesh,
-  MeshBasicMaterial,
-  MeshPhongMaterial,
   DirectionalLight,
   WebGLRenderer,
-  Vector3,
-  OrthographicCamera,
   Camera,
   MathUtils,
   Fog,
@@ -22,10 +18,17 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 
 export class TextureScene extends Scene3D {
   private camera!: Camera;
+  private activeCamera!: Camera;
   private scene!: Scene;
-  private mesh!: Mesh;
+
   orbitCtrls!: OrbitControls;
   cubeGrp!: THREE.Group<THREE.Object3DEventMap>;
+  sLight!: THREE.SpotLight;
+  targetSpotCube!: THREE.Mesh;
+
+  settings = {
+    update: true
+  };
 
   /**
    * Based off the three.js docs: https://threejs.org/examples/?q=cube#webgl_geometry_cube
@@ -36,6 +39,9 @@ export class TextureScene extends Scene3D {
 
   init(renderer: WebGLRenderer) {
     super.init(renderer);
+    renderer.shadowMap.enabled = true;
+
+    this.addBooleanUI(this.settings, "update", "update");
 
     const aspectR = window.innerWidth / window.innerHeight;
 
@@ -46,33 +52,37 @@ export class TextureScene extends Scene3D {
       1000
     );
 
-    // this.camera = new OrthographicCamera(-1 * aspectR, aspectR, 1, -1, 0.1, 1000);
+    // this.camera = new THREE.OrthographicCamera(-1 * aspectR, aspectR, 1, -1, 0.1, 1000);
 
-    this.camera.position.y = 100;
-    this.camera.position.z = 300;
+    this.activeCamera = this.camera;
+
+    this.camera.position.y = 320;
+    this.camera.position.z = 500;
     this.camera.rotateX(MathUtils.degToRad(-30));
 
     this.scene = new Scene();
-    this.scene.background = new Color(0xcfcfff);
-    this.scene.fog = new Fog(this.scene.background, 200, 1000);
+    this.scene.background = new THREE.CubeTextureLoader()
+      .setPath('images/scenes/05/')
+      .load([
+        'px.png',
+        'nx.png',
+        'py.png',
+        'ny.png',
+        'pz.png',
+        'nz.png'
+      ]);
+
+    this.scene.environment = this.scene.background;
+
+    this.scene.fog = new Fog(0xcfcfff, 400, 1000);
 
     const ground = this._makeGround();
+    ground.material.envMapIntensity = 0.08;
     this.scene.add(ground);
-
-    const texture = new TextureLoader().load("images/textures/crate.gif");
-
-    const geometryParameters = {
-      width: 20,
-      height: 20,
-      depth: 20
-    };
-    const geometry = new BoxGeometry(geometryParameters.width, geometryParameters.height, geometryParameters.depth);
-
-    this.cubeGrp = new THREE.Group();
-    this.scene.add(this.cubeGrp);
 
     const stones_grp = new THREE.Group();
     const stone = this._makeStone();
+    stone.material.envMapIntensity = 0.05;
     stones_grp.add(stone);
     const stone_w = 25;
     Array<number>(30).fill(1).map((v, i) => {
@@ -86,8 +96,9 @@ export class TextureScene extends Scene3D {
 
     const stones2_grp = new THREE.Group();
     const stone2 = this._makeStone2();
+    stone2.material.envMapIntensity = 0.1;
     stones_grp.add(stone);
-    Array<number>(5).fill(1).map((v, i) => {
+    Array<number>(10).fill(1).map((v, i) => {
       const index = i;
       const s = stone2.clone();
       s.position.set(MathUtils.randFloatSpread(4) * 200, 0, MathUtils.randInt(200, 400));
@@ -99,42 +110,107 @@ export class TextureScene extends Scene3D {
 
     // Light
     const color = 0xffffef;
-    const intensity = 2;
+    const intensity = 0.05;
     const light = new DirectionalLight(color, intensity);
-    light.position.set(0, 600, 500);
-    // light.castShadow = true;
+    light.position.set(0, 1000, 1000);
+    // light.target.position.set(0, 0, 0);
+    light.castShadow = true;
     this.scene.add(light);
 
 
+    this.sLight = new THREE.SpotLight(
+      new THREE.Color("#ffea80"),
+      4,
+      330,
+      MathUtils.degToRad(10),
+      0.4,
+      0.1
+    );
+    this.sLight.position.set(0, 200, 0);
+    this.scene.add(this.sLight);
+    // pLight.lookAt(stones_grp.position);
+    this.scene.add(new THREE.SpotLightHelper(this.sLight));
+
+    this.sLight.castShadow = true;
+    this.sLight.shadow.radius = 1;
+    // this.sLight.shadow.focus = 0.5;
+    light.shadow.mapSize.width = 2048;
+    light.shadow.mapSize.height = 2048;
+
+    this.sLight.shadow.camera.far = 150;
+    this.sLight.shadow.camera.fov = 30;
+    this.sLight.shadow.camera.zoom = 0.75;
+    // this.sLight.shadow.camera.aspect = aspectR;
+    // this.sLight.shadow.autoUpdate = true;
+    // this.sLight.shadow.needsUpdate = true;
+    console.log(this.sLight.shadow);
+
+    this.addNumberUI(this.sLight.shadow.camera, "far", "far", {
+      max: 800,
+    });
+
+    const cameraChangeOption = { visible: true };
+    const cameraChangeUI = this.addBooleanUI(cameraChangeOption, "visible", "Change Camera");
+    cameraChangeUI.on("change", () => {
+      this.activeCamera = cameraChangeOption.visible ?
+        this.camera : this.sLight.shadow.camera;
+    });
+
+    const spotShadowCameraHelper = new THREE.CameraHelper(this.sLight.shadow.camera);
+    this.scene.add(spotShadowCameraHelper);
+
+    const spotLightCube = new BoxGeometry(20, 20, 20);
+    this.targetSpotCube = new Mesh(spotLightCube);
+    this.targetSpotCube.visible = false;
+    this.targetSpotCube.position.set(220, -this.sLight.position.y, 0);
+    this.sLight.add(this.targetSpotCube);
+    this.sLight.target = this.targetSpotCube;
+
+    this.addNumberUI(this.sLight.shadow, "normalBias", "normalBias");
+    this.addNumberUI(this.sLight.shadow, "radius", "radius");
+
+    // this.pLight.target.position.set(20, 0, 100);
+    // this.scene.add(this.pLight.target);
+
+    // this.addNumberUI(pLight, pLight.);
+
     this.orbitCtrls = new OrbitControls(this.camera, this.renderer.domElement);
-    this.orbitCtrls.maxPolarAngle = MathUtils.degToRad(85);
+    // this.orbitCtrls.maxPolarAngle = MathUtils.degToRad(85);
     // this.orbitCtrls.minPolarAngle = MathUtils.degToRad(50);
     this.orbitCtrls.minDistance = 100;
     this.orbitCtrls.maxDistance = 400;
     this.orbitCtrls.minDistance = 10;
+    this.orbitCtrls.maxPolarAngle = Math.PI / 2 - 0.05; // prevent camera below ground
+    this.orbitCtrls.minPolarAngle = Math.PI / 4;        // prevent top down view
     // this.orbitCtrls.autoRotate = true;
     // this.orbitCtrls.enableDamping = true;
 
+
+
   }
+
+  clock = new THREE.Clock();
 
   animate(time: number): void {
 
-    // if (this.mesh.rotation.y > this.PI_2) {
-    //   this.mesh.rotation.y = 0;
-    // }
-
-    // this.mesh.rotation.x += 0.003;
-    // this.mesh.rotation.y += 0.005;
-
-    // this.cubeGrp.rotation.y += 0.002;
-
-
-
     this.orbitCtrls.update();
+
+    if (!this.settings.update) {
+      return;
+    }
+
+    const etime = this.clock.getElapsedTime();
+
+
+    // this.sLight.rotation.y += 0.005;
+
+    this.sLight.target.position.x = Math.sin(etime * 0.2) * 200;
+    this.sLight.target.position.z = Math.cos(etime * 0.2) * 200;
+
   }
 
   graph(): [Scene, Camera] {
-    return [this.scene, this.camera];
+    return [this.scene, this.activeCamera];
   }
 
   destroy(): void {
@@ -190,9 +266,10 @@ export class TextureScene extends Scene3D {
       roughness: 0.9,
     });
     const mesh = new THREE.Mesh(gem, material2);
-    mesh.position.setY(-10);
+    mesh.receiveShadow = true;
     mesh.rotateX(THREE.MathUtils.degToRad(-90));
     mesh.add(this.addAxisUI(50, "Axis Ground"));
+    mesh.position.setY(-20);
 
     return mesh;
   }
@@ -232,16 +309,17 @@ export class TextureScene extends Scene3D {
       normalMap: tex_normal,
 
       displacementMap: tex_height,
-      displacementScale: 1,
+      displacementScale: 2,
 
       aoMap: tex_ao,
-      aoMapIntensity: 0.5,
+      aoMapIntensity: 1,
 
       roughnessMap: tex_roughness,
       roughness: 0.9,
 
     });
     const mesh = new THREE.Mesh(gem, material);
+    mesh.castShadow = true;
     return mesh;
 
   }
@@ -292,8 +370,8 @@ export class TextureScene extends Scene3D {
       // bumpScale: 1,
 
       displacementMap: tex_height,
-      displacementScale: 20,
-      displacementBias: 50,
+      displacementScale: 3,
+      displacementBias: 0,
 
       aoMap: tex_ao,
       aoMapIntensity: 1,
@@ -312,6 +390,8 @@ export class TextureScene extends Scene3D {
     this.addNumberUI(material, "bumpScale", "bumpScale");
 
     const mesh = new THREE.Mesh(gem, material);
+    mesh.castShadow = true;
+    mesh.receiveShadow = true;
     return mesh;
 
   }

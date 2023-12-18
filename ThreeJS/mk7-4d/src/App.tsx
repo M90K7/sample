@@ -32,6 +32,26 @@ const sceneItems: SceneModel[] = [
     {
         name: "Texture",
         type: scene.TextureScene,
+        active: false
+    },
+    {
+        name: "Light",
+        type: scene.LightScene,
+        active: false
+    },
+    {
+        name: "gltf",
+        type: scene.GltfSampleScene,
+        active: false
+    },
+    {
+        name: "Text",
+        type: scene.TextScene,
+        active: false
+    },
+    {
+        name: "Particles",
+        type: scene.ParticlesScene,
         active: true
     }
 ];
