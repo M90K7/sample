@@ -52,6 +52,11 @@ const sceneItems: SceneModel[] = [
     {
         name: "Particles",
         type: scene.ParticlesScene,
+        active: false
+    },
+    {
+        name: "Shaders",
+        type: scene.ShaderScene,
         active: true
     }
 ];

@@ -40,6 +40,10 @@ export class TextureScene extends Scene3D {
   init(renderer: WebGLRenderer) {
     super.init(renderer);
     renderer.shadowMap.enabled = true;
+    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+    renderer.outputColorSpace = THREE.SRGBColorSpace;
+    renderer.toneMapping = THREE.ReinhardToneMapping;
+    renderer.toneMappingExposure = 2;
 
     this.addBooleanUI(this.settings, "update", "update");
 
@@ -71,6 +75,8 @@ export class TextureScene extends Scene3D {
         'pz.png',
         'nz.png'
       ]);
+    this.scene.background.colorSpace = THREE.SRGBColorSpace;
+
 
     this.scene.environment = this.scene.background;
 
@@ -115,17 +121,19 @@ export class TextureScene extends Scene3D {
     light.position.set(0, 1000, 1000);
     // light.target.position.set(0, 0, 0);
     light.castShadow = true;
+    light.shadow.normalBias = 0.05;
     this.scene.add(light);
 
 
     this.sLight = new THREE.SpotLight(
       new THREE.Color("#ffea80"),
-      4,
+      10,
       330,
       MathUtils.degToRad(10),
       0.4,
       0.1
     );
+    this.sLight.shadow.normalBias = 0.05;
     this.sLight.position.set(0, 200, 0);
     this.scene.add(this.sLight);
     // pLight.lookAt(stones_grp.position);
@@ -383,6 +391,8 @@ export class TextureScene extends Scene3D {
       metalness: 0.35
 
     });
+
+
 
     this.addNumberUI(material, "displacementBias", "d-Bias");
     this.addNumberUI(material, "displacementScale", "d-Scale");

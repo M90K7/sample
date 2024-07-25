@@ -7,3 +7,4 @@ export * from "./light";
 export * from "./gltf-loader";
 export * from "./text.scene";
 export * from "./particles.scene";
+export * from "./shaders.scene";
